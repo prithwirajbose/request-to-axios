@@ -259,7 +259,9 @@ The callback API can be promisified with Node's built-in utility:
 ```js
 const { promisify } = require('node:util');
 
-const requestAsync = promisify(request);
+const requestAsync = promisify((options, callback) => {
+  request(options, (error, response, body) => callback(error, { response, body }));
+});
 const { response, body } = await requestAsync('https://api.example.test/status');
 ```
 
