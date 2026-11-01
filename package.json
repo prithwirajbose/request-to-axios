@@ -1,7 +1,7 @@
 {
   "name": "request-to-axios",
   "version": "1.0.0",
-  "description": "A request-compatible API backed by Axios for migrating legacy Node.js clients which uses request lib.",
+  "description": "A request lib compatible API backed by Axios for migrating legacy Node.js clients which still uses request lib",
   "author": {
     "name": "Prithwiraj Bose",
     "email": "sribasu@gmail.com",
@@ -15,6 +15,18 @@
   "bugs": {
     "url": "https://github.com/prithwirajbose/request-to-axios/issues"
   },
+  "keywords": [
+    "request",
+    "axios",
+    "request-to-axios",
+    "request legacy",
+    "request migration",
+    "request deprecated",
+    "request replacement",
+    "secure request",
+    "request port",
+    "request replacement"
+  ],
   "main": "index.js",
   "files": [
     "index.js",
@@ -31,7 +43,7 @@
     "test:coverage": "node --experimental-test-coverage --test"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=16.9"
   },
   "license": "MIT",
   "dependencies": {
