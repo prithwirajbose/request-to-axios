@@ -32,8 +32,8 @@ jobs:
     - run: npm test
 
   publish:
-    needs: build # Ensures npm publish only runs if all matrix tests pass successfully
-    if: startsWith(github.ref, 'refs/tags/') # Ensures this job only executes on tag pushes
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/') #  Ensures this job only executes on tag pushes
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -41,13 +41,19 @@ jobs:
     - name: Use Node.js 22.x
       uses: actions/setup-node@v4
       with:
-        node-version: '22.x' # Uses a single stable Node version to handle the deployment
-        registry-url: 'https://npmjs.org'
+        node-version: '22.x'
+        # REMOVE registry-url from here so it doesn't taint npm ci config
         
-    - run: npm ci
-    - run: npm run build --if-present
+    - name: Install dependencies
+      run: npm ci # This will now download public dependencies normally without token interference
+      
+    - name: Run build step
+      run: npm run build --if-present
     
     - name: Publish to npm registry
-      run: npm publish
+      run: |
+        npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+        npm publish
       env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # Reads your secret token configured on GitHub
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }} # Token is isolated to just this step
+
