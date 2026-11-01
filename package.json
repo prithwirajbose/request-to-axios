@@ -9,7 +9,7 @@
   },
   "homepage": "https://github.com/prithwirajbose/request-to-axios",
   "repository": {
-    "url": "https://github.com/prithwirajbose/request-to-axios.git",
+    "url": "git+https://github.com/prithwirajbose/request-to-axios.git",
     "type": "git"
   },
   "bugs": {
