@@ -33,7 +33,7 @@ jobs:
 
   publish:
     needs: build # Ensures npm publish only runs if all matrix tests pass successfully
-    if: startsWith(github.ref, 'refs/tags/v') # Ensures this job only executes on tag pushes
+    if: startsWith(github.ref, 'refs/tags/') # Ensures this job only executes on tag pushes
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
